@@ -66,7 +66,7 @@ class QueryStringBuilder extends QueryStringAbstract {
     public function setQueryDataByUri(string $uri): self {
         $uriParts = parse_url($uri);
 
-        if (array_key_exists('query', $uriParts) === false) {
+        if ((array_key_exists('query', $uriParts) === false) || empty($uriParts['query'])) {
             throw new QueryStringNotFoundException("Ошибка формирования строки запроса: не найден обязательный параметр query в $uri");
         }
 
