@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace mepihindeveloper\components\query;
 
 use mepihindeveloper\components\query\exceptions\QueryStringNotFoundException;
+use mepihindeveloper\components\query\interfaces\QueryStringInterface;
 use mepihindeveloper\components\query\param\exceptions\ParamDataException;
 use mepihindeveloper\components\query\param\interfaces\ParamInterface;
 use mepihindeveloper\components\query\param\ParamBuilder;
@@ -102,9 +103,9 @@ class QueryStringBuilder extends QueryStringAbstract {
     /**
      * Формирует объект QueryString. Может быть изменен в конструкторе класса
      *
-     * @return QueryString
+     * @return QueryStringInterface
      */
-    public function build(): QueryString {
+    public function build(): QueryStringInterface {
         return new $this->queryString($this);
     }
 }
