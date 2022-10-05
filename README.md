@@ -74,12 +74,12 @@ $query2 = (new QueryStringBuilder())->setParams([
 
 | Метод                                                 | Аргументы                                                  | Возвращаемые данные | Исключения                                       | Описание                                                               |
 |-------------------------------------------------------|------------------------------------------------------------|---------------------|--------------------------------------------------|------------------------------------------------------------------------|
-| __construct(string $queryString = QueryString::class) | Класс объекта QueryString. Реализуется через Object::class |                     |                                                  |                                                                        |
+| __construct(string $queryString = QueryString::class, string $param = Param::class) | Класс объекта QueryString. Реализуется через Object::class. Класс объекта Param. Реализуется через Object::class |                     |                                                  |                                                                        |
 | setParam(ParamInterface $param)                       | Объект параметра                                           | QueryStringBuilder  |                                                  | Устанавливает параметр                                                 |
 | setParams(array $params)                              | ParamInterface[] $params Массив объектов параметров        | QueryStringBuilder  |                                                  | Устанавливает параметры                                                |
 | setQueryDataByUri(string $uri)                        | URI                                                        | QueryStringBuilder  | QueryStringNotFoundException\|ParamDataException | Устанавливает параметры и фрагмент из переданной строки                |
 | setFragment(string $fragment)                         | Фрагмент                                                   | QueryStringBuilder  |                                                  | Устанавливает фрагмент запроса (https://www.ietf.org/rfc/rfc3986.txt)  |
-| build()                                               |                                                            | QueryString         |                                                  | Формирует объект QueryString. Может быть изменен в конструкторе класса |
+| build()                                               |                                                            | QueryStringInterface         |                                                  | Формирует объект QueryString. Может быть изменен в конструкторе класса |
 
 # Контакты
 

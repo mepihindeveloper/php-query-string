@@ -7,6 +7,7 @@ use mepihindeveloper\components\query\exceptions\QueryStringNotFoundException;
 use mepihindeveloper\components\query\interfaces\QueryStringInterface;
 use mepihindeveloper\components\query\param\exceptions\ParamDataException;
 use mepihindeveloper\components\query\param\interfaces\ParamInterface;
+use mepihindeveloper\components\query\param\Param;
 use mepihindeveloper\components\query\param\ParamBuilder;
 
 /**
@@ -18,14 +19,18 @@ class QueryStringBuilder extends QueryStringAbstract {
 
     /** @var string Класс объекта QueryString. Реализуется через Object::class */
     protected string $queryString;
+    /** @var string Класс объекта Param. Реализуется через Object::class */
+    protected string $param;
 
     /**
      * QueryStringBuilder конструктор.
      *
      * @param string $queryString Класс объекта QueryString. Реализуется через Object::class
+     * @param string $param Класс объекта Param. Реализуется через Object::class
      */
-    public function __construct(string $queryString = QueryString::class) {
+    public function __construct(string $queryString = QueryString::class, string $param = Param::class) {
         $this->queryString = $queryString;
+        $this->param = $param;
     }
 
     /**
@@ -74,7 +79,7 @@ class QueryStringBuilder extends QueryStringAbstract {
         parse_str($uriParts['query'], $params);
 
         foreach ($params as $name => $value) {
-            $param = (new ParamBuilder)->setName($name)->setValue($value)->build();
+            $param = (new ParamBuilder($this->param))->setName($name)->setValue($value)->build();
             $this->params[$param->getName()] = $param;
         }
 
