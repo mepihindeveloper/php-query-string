@@ -37,6 +37,17 @@ class QueryStringTest extends Unit
         static::assertArrayHasKey('b', $query->get());
     }
 
+    public function testSetParamsArray() {
+        $params = [
+            'a' => 1,
+            'name' => [1, 2]
+        ];
+
+        $query = (new QueryStringBuilder())->setParamsArray($params)->build();
+        static::assertArrayHasKey('a', $query->get());
+        static::assertArrayHasKey('name', $query->get());
+    }
+
     public function testSetFragment() {
         $query = (new QueryStringBuilder())->setFragment('nose')->build();
         static::assertSame('nose', $query->getFragment());

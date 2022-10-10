@@ -47,7 +47,7 @@ class QueryStringBuilder extends QueryStringAbstract {
     }
 
     /**
-     * Устанавливает параметры
+     * Устанавливает параметры массива объектов ParamInterface
      *
      * @param ParamInterface[] $params Массив объектов параметров
      *
@@ -55,6 +55,23 @@ class QueryStringBuilder extends QueryStringAbstract {
      */
     public function setParams(array $params): self {
         foreach ($params as $param) {
+            $this->params[$param->getName()] = $param;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Устанавливает параметры
+     *
+     * @param array $params Массив параметров
+     *
+     * @return $this
+     * @throws ParamDataException
+     */
+    public function setParamsArray(array $params): self {
+        foreach ($params as $name => $value) {
+            $param = (new ParamBuilder($this->param))->setName($name)->setValue($value)->build();
             $this->params[$param->getName()] = $param;
         }
 
